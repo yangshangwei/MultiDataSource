@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @Configuration
@@ -25,6 +26,8 @@ public class MybatisDB1Config {
 
 	@Bean(name = "db1SqlSessionFactoryBean")
 	@ConfigurationProperties(prefix = "mybatis-db1") // 和 配置文件中的前缀保持一致
+	// @Primary 如果SqlSessionFactoryBean的名字和MybatisDB2Config中的一致（默认方法名），需要加上这个注解，优先注入该SqlSessionFactoryBean
+	// 这里我们通过bean指定了name,并且方法名也不一样，所以如果情况不一样，看是否需要加入@Primary 。 如果需要两个方法上加一个就行了，都加的话，spring又找不到bean注入啦。。
 	public SqlSessionFactoryBean db1SqlSessionFactoryBean() throws Exception {
 		SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
 		// 配置数据源
