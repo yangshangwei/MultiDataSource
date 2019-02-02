@@ -1,0 +1,45 @@
+# datasource  db1   前缀为自定义的datasource-db1
+spring:
+  datasource-db1:
+    driver-class-name: com.mysql.cj.jdbc.Driver # JDBC连接Mysql6以上com.mysql.cj.jdbc.Driver （服务端为Mysql8）
+    url: jdbc:mysql://localhost:3306/db1?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+
+
+# datasource db2  前缀为自定义的datasource-db2
+  datasource-db2: 
+    driver-class-name: com.mysql.cj.jdbc.Driver # JDBC连接Mysql6以上com.mysql.cj.jdbc.Driver  （服务端为Mysql8）
+    url: jdbc:mysql://localhost:3306/db2?serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+
+# mybatis 
+mybatis_db1: 
+  # 映射文件的路径 ， 这个切换数据源的场景下不能配置 * 通配符，有多个 逗号隔开，继续跟 classpath:mapper_db1/XXX
+  # 在MybatisConfig.java#sqlSessionFactoryBean方法中通过sqlSessionFactoryBean设置classpath:mapper_db1/*.xml ,不然每次都要改这个地方，不好维护。
+  #  mapper-locations: classpath:mapper_db1/*.xml  
+  
+  # 类型别名包配置，只能指定具体的包，多个配置可以使用英文逗号隔开
+  # 也可以通过sqlSessionFactoryBean.setTypeAliasesPackage("com.artisan.domain.db1")
+  type-aliases-package: com.artisan.domain.db1
+  
+  
+  # Mybatis SQL语句控制台打印
+  configuration: 
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+      
+ # mybatis 
+mybatis_db2: 
+  # 映射文件的路径 ， 这个切换数据源的场景下不能配置 * 通配符，有多个 逗号隔开，继续跟 classpath:mapper/XXX
+  # 在MybatisDB2Config.java#sqlSessionFactoryBean方法中通过sqlSessionFactoryBean设置classpath:mapper_db2/*.xml ,不然每次都要改这个地方，不好维护。
+  #mapper-locations: classpath:mapper_db2/*.xml  
+  
+  
+  # 类型别名包配置，只能指定具体的包，多个配置可以使用英文逗号隔开
+  type-aliases-package: com.artisan.domain.db2
+  
+  
+  # Mybatis SQL语句控制台打印
+  configuration: 
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
