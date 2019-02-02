@@ -7,4 +7,9 @@
 	<select id="selectArtisanById"  resultType="Artisan"> 
 		select id , name from db1_artisan where id= #{id}
 	</select>
+	
+	<insert id="insertArtisan">
+			insert  into db1_artisan(name) values (#{name})
+	</insert>
+	
 </mapper>

@@ -36,9 +36,26 @@ public class ArtisanServiceImpl implements ArtisanService {
 	@Override
 	@Transactional(DataSources.DB1_TRANSACTION)
 	public void transTest() {
-		artisanDaoByJdbcTemplate.addArtisan("粉刷匠");
-		artisanDaoByJdbcTemplate.updateArtisan("小铜匠", 1);
+		
+		// jdbcTemplate作为持久层
+//		artisanDaoByJdbcTemplate.addArtisan("粉刷匠");
+//		artisanDaoByJdbcTemplate.updateArtisan("小铜匠", 1);
+		
+		
+		
+		// mybatis作为持久层
+		Artisan artisan = new Artisan();
+		artisan.setName("MB-Name");
+		
+		artisanMapper.insertArtisan(artisan);
+		
+		artisan = new Artisan();
+		artisan.setName("修改后的名字");
+		artisan.setId(1L);
+		
+		artisanMapper.updateArtisan(artisan);
 	}
+	
 	
 	
 	

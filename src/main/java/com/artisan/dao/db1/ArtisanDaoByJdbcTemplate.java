@@ -22,6 +22,7 @@ public class ArtisanDaoByJdbcTemplate {
 	}
 	
 	
+	// 故意写错字段名，测试事务回滚
 	public void updateArtisan(String name ,int id) {
 		String sql = "update db1_artisan set name1 = ? where id = ?" ;
 		jdbcTemplate.update(sql,new Object[] {name,id});
